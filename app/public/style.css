@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+    background: #43A047;
+}
+
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}
+
+.form .message a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.form .register-form {
+    display: none;
+}
+
+/* Responsividade para dispositivos móveis */
+
+@media screen and (max-width: 480px) {
+
+    .form {
+        padding: 25px;
+    }
+
+    .form input {
+        font-size: 16px;
+    }
+
+    .form button {
+        font-size: 18px;
+    }
+
+}
+
+/* Defina as cores que você deseja usar */
+:root {
+    --cor-primaria: #007bff;
+    --cor-secundaria: #95a5b8;
+    --cor-fundo: #f8f9fa;
+}
+
+/* Defina estilos para o cabeçalho */
+header {
+    background-color: var(--cor-primaria);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Estilos para a tabela de produtos */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table th,
+table td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: var(--cor-primaria);
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Estilos para o botão Adicionar Produto */
+#btn-add-produto {
+    background-color: var(--cor-primaria);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+}
+
+#btn-add-produto:hover {
+    background-color: var(--cor-secundaria);
+    cursor: pointer;
+}
+
+/* Estilos para o formulário de adicionar/editar produto */
+#produto-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#produto-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+#produto-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#produto-form input[type="text"],
+#produto-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#produto-form button[type="submit"] {
+    background-color: var(--cor-primaria);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    padding: 8px 12px;
+}
+
+#produto-form button[type="submit"]:hover {
+    background-color: var(--cor-secundaria);
+    cursor: pointer;
+}
+
+#btn-novo-produto {
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#btn-novo-produto:hover {
+    background-color: #95a5b8;
+}
+
+#btn-cancelar {
+    background-color: #c5c5c5;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#btn-cancelar:hover {
+    background-color: #8f8f8f;
+}

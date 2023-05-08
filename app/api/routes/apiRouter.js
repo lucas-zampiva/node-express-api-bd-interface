@@ -2,28 +2,33 @@ require('dotenv').config();
 const express = require('express');
 const endpoint = '/v1/';
 const knex = require('../../db/db');
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const middleWare = require('../middlewares/verificaTokenMiddleware');
 
 let apiRouter = express.Router();
 
 
-apiRouter.get(endpoint + 'produtos', function (req, res) {
+apiRouter.get(endpoint + 'produtos', middleWare.checkToken, function (req, res) {
     knex.select('*').from('produtos')
         .then(produtos => res.status(200).json(produtos))
         .catch(err => res.status(500).json({ message: `Erro ao recuperar produtos: ${err.message}` }))
 })
 
-apiRouter.get(endpoint + 'produtos/:id', (req, res) => {
+apiRouter.get(endpoint + 'produtos/:id', middleWare.checkToken, (req, res) => {
     const id = req.params.id;
     knex.select('*').from('produtos').where({ id })
         .then(produtos => res.status(200).json(produtos))
         .catch(err => res.status(500).json({ message: `Erro ao recuperar produtos: ${err.message}` }))
 })
 
-apiRouter.post(endpoint + 'produtos', (req, res) => {
+apiRouter.post(endpoint + 'produtos', middleWare.checkToken, middleWare.isAdmin, (req, res) => {
     knex('produtos')
-        .insert(req.body, ['id'])
+        .insert({
+            descricao: req.body.descricao,
+            valor: req.body.valor,
+            marca: req.body.marca,
+        }, ['id'])
         .then(produtos => {
             let id = produtos[0].id
             res.json({ message: `Produto inserido com sucesso.`, id: id })
@@ -31,7 +36,7 @@ apiRouter.post(endpoint + 'produtos', (req, res) => {
         .catch(err => res.status(500).json({ message: `Erro ao inserir produto: ${err.message}` }))
 })
 
-apiRouter.put(endpoint + 'produtos/:id', (req, res) => {
+apiRouter.put(endpoint + 'produtos/:id', middleWare.checkToken, middleWare.isAdmin, (req, res) => {
     const id = parseInt(req.params.id);
     knex('produtos')
         .where({ id })
@@ -46,7 +51,7 @@ apiRouter.put(endpoint + 'produtos/:id', (req, res) => {
         .catch(err => res.status(500).json({ message: `Erro ao atualizar produto: ${err.message}` }))
 })
 
-apiRouter.delete(endpoint + 'produtos/:id', (req, res) => {
+apiRouter.delete(endpoint + 'produtos/:id', middleWare.checkToken, middleWare.isAdmin, (req, res) => {
     const id = parseInt(req.params.id);
     knex('produtos')
         .where({ id })
@@ -64,7 +69,7 @@ apiRouter.post(endpoint + 'seguranca/register', (req, res) => {
             login: req.body.login,
             senha: bcrypt.hashSync(req.body.senha, 8),
             email: req.body.email,
-            roles: 'USER'
+            roles: 'ADMIN'
         }, ['id'])
         .then((result) => {
             let usuario = result[0]
@@ -75,6 +80,7 @@ apiRouter.post(endpoint + 'seguranca/register', (req, res) => {
             res.status(500).json({
                 message: 'Erro ao registrar usuario - ' + err.message
             })
+            return
         })
 })
 
@@ -101,11 +107,13 @@ apiRouter.post(endpoint + 'seguranca/login', (req, res) => {
                 }
             }
             res.status(401).json({ message: 'Login ou senha incorretos' })
+            return
         })
         .catch(err => {
             res.status(500).json({
                 message: 'Erro ao verificar login - ' + err.message
             })
+            return
         })
 })
 

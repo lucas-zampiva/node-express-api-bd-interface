@@ -1,15 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <h3>hello world"</h3>
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form">
+                <input type="text" name="username" placeholder="username" />
+                <input type="password" name="password" placeholder="password" />
+                <button type="button" class="login-btn">login</button>
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
+            <form class="register-form">
+                <h2>Create an account</h2>
+                <input type="text" name="name" placeholder="Name">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <input type="email" name="email" placeholder="Email">
+                <button type="button" class="register-btn">Create</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>

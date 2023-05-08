@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Produtos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <h1>Produtos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Marca</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="produtos-tbody">
+        </tbody>
+    </table>
+    <div class="form-popup" id="produto-popup">
+        <form id="produto-form">
+            <h2 id="produto-form-title">Novo Produto</h2>
+            <input type="hidden" name="id" id="produto-id">
+            <label for="produto-descricao"><b>Descrição</b></label>
+            <input type="text" placeholder="Digite a descrição do produto" name="descricao" id="produto-descricao"
+                required>
+            <label for="produto-valor"><b>Valor</b></label>
+            <input type="text" placeholder="Digite o valor do produto" name="valor" id="produto-valor" required>
+            <label for="produto-marca"><b>Marca</b></label>
+            <input type="text" placeholder="Digite a marca do produto" name="marca" id="produto-marca" required>
+            <button type="submit" class="btn" id="produto-submit">Salvar</button>
+            <button type="button" class="btn cancel" id="btn-cancelar" onclick="closeProdutoPopup()">Cancelar</button>
+        </form>
+    </div>
+    <button class="btn" type="button" onclick="openProdutoPopup()" id="btn-novo-produto">Novo Produto</button>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="produtos.js"></script>
+</body>
+
+</html>
