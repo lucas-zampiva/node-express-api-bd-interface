@@ -33,6 +33,8 @@ jobs:
           justlogin: true
       - name: Add Heroku remote
         run: heroku git:remote --app=${{secrets.HEROKU_API_APP_NAME}}
+      - name: Busca all branchs e desfaz o shallow
+        run: git fetch --all --unshallow
       - name: Push to master branch app on Heroku
         run: git push heroku ${{ github.ref_name }}:master --force
       - name: config heroku
