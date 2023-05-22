@@ -25,8 +25,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_API_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_API_EMAIL}}
-          justlogin: true
-      - name: config heroku
-        run: heroku config:set PGSSLMODE=no-verify -a ${{secrets.HEROKU_API_APP_NAME}}
-      - name: rodar migrations
-        run: heroku run knex migrate:latest -a ${{secrets.HEROKU_API_APP_NAME}}
+#          justlogin: true
+#      - name: config heroku
+#        run: heroku config:set PGSSLMODE=no-verify -a ${{secrets.HEROKU_API_APP_NAME}}
+#      - name: rodar migrations
+#        run: heroku run knex migrate:latest -a ${{secrets.HEROKU_API_APP_NAME}}
