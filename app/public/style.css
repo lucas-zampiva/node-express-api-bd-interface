@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+* {
+    font-family: "Roboto", sans-serif;
+}
+
 .login-page {
     width: 360px;
     padding: 8% 0 0;
@@ -179,7 +183,7 @@ table th {
     border-radius: 4px;
     color: #fff;
     font-size: 1rem;
-    padding: 8px 12px;
+    padding: 10px 20px;
 }
 
 #produto-form button[type="submit"]:hover {
@@ -188,7 +192,7 @@ table th {
 }
 
 #btn-novo-produto {
-    background-color: #007bff;
+    background-color: #3998ff;
     border: none;
     border-radius: 4px;
     color: white;
@@ -199,6 +203,7 @@ table th {
     text-decoration: none;
     display: inline-block;
     transition: background-color 0.3s ease-in-out;
+    margin-bottom: 15px;
 }
 
 #btn-novo-produto:hover {
@@ -221,4 +226,88 @@ table th {
 
 #btn-cancelar:hover {
     background-color: #8f8f8f;
+}
+
+.btn-excluir {
+    background-color: #dc3545;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-excluir:hover {
+    background-color: #c9656f;
+}
+
+.btn-editar {
+    background-color: #5cdc35;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-editar:hover {
+    background-color: #abd39f;
+}
+
+#btn-sair {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #3395fd;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#btn-sair:hover {
+    background-color: #0062cc;
+}
+
+#btn-tornar-admin {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#btn-tornar-admin:hover {
+    background-color: #218838;
 }

@@ -15,6 +15,69 @@ $(document).ready(function () {
         salvarProduto(produto);
     });
 
+    $("#btn-sair").on('click', () => {
+        Swal.fire({
+            title: 'Sair',
+            text: "Deseja realmente deseja sair?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3395fd',
+            cancelButtonColor: '##c5c5c5',
+            confirmButtonText: 'Sair',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('token');
+                window.location.href = '/';
+            }
+        });
+    })
+
+    $("#btn-tornar-admin").on('click', () => {
+        Swal.fire({
+            title: 'Admin',
+            text: "Deseja realmente virar ADMIN?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3395fd',
+            cancelButtonColor: '##c5c5c5',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'PATCH',
+                    url: "/api/v1/usuarios/tornar-admin",
+                    contentType: "application/json",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem('token')
+                    },
+                    success: function (response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sucesso',
+                            text: 'Usuário tornou-se admin com sucesso!'
+                        }).then((result) => {
+                            listarProdutos();
+                            closeProdutoPopup();
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Erro ao atualizar usuário para ADMIN: ' + xhr.responseJSON.message
+                        }).then((result) => {
+                            if (error == 'Unauthorized') {
+                                window.location = '/';
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    })
+
 
     // Recupera a lista de produtos ao carregar a página
     listarProdutos();
@@ -58,8 +121,8 @@ function renderizarProdutos() {
             '<td>' + produto.valor + '</td>' +
             '<td>' + produto.marca + '</td>' +
             '<td>' +
-            '<button class="btn" onclick="editarProduto(' + produto.id + ')">Editar</button>' +
-            '<button class="btn" onclick="excluirProduto(' + produto.id + ')">Excluir</button>' +
+            '<button class="btn btn-editar" onclick="editarProduto(' + produto.id + ')">Editar</button>' +
+            '<button class="btn btn-excluir" onclick="excluirProduto(' + produto.id + ')">Excluir</button>' +
             '</td>' +
             '</tr>';
         tbody.append(row);
@@ -125,7 +188,8 @@ function excluirProduto(id) {
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sim, apague!'
+        confirmButtonText: 'Sim, apague!',
+        cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({

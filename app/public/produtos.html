@@ -11,6 +11,9 @@
 
 <body>
     <h1>Produtos</h1>
+    <div>
+        <button class="btn" type="button" onclick="openProdutoPopup()" id="btn-novo-produto">Novo Produto</button>
+    </div>
     <table>
         <thead>
             <tr>
@@ -18,7 +21,7 @@
                 <th>Descrição</th>
                 <th>Valor</th>
                 <th>Marca</th>
-                <th>Ações</th>
+                <th style="width:15%">Ações</th>
             </tr>
         </thead>
         <tbody id="produtos-tbody">
@@ -39,7 +42,8 @@
             <button type="button" class="btn cancel" id="btn-cancelar" onclick="closeProdutoPopup()">Cancelar</button>
         </form>
     </div>
-    <button class="btn" type="button" onclick="openProdutoPopup()" id="btn-novo-produto">Novo Produto</button>
+    <button id="btn-tornar-admin">Tornar admin</button>
+    <button id="btn-sair">Sair</button>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="produtos.js"></script>
 </body>

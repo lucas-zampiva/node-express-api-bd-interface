@@ -69,11 +69,15 @@ apiRouter.post(endpoint + 'seguranca/register', (req, res) => {
             login: req.body.login,
             senha: bcrypt.hashSync(req.body.senha, 8),
             email: req.body.email,
-            roles: 'ADMIN'
+            roles: 'USER'
         }, ['id'])
         .then((result) => {
-            let usuario = result[0]
-            res.status(200).json({ "id": usuario.id })
+            let usuario = result[0];
+            let tokenJWT = jwt.sign({ id: usuario.id },
+                process.env.SECRET_KEY, {
+                expiresIn: 3600
+            });
+            res.status(200).json({ "id": usuario.id, "token": tokenJWT })
             return
         })
         .catch(err => {
@@ -115,6 +119,18 @@ apiRouter.post(endpoint + 'seguranca/login', (req, res) => {
             })
             return
         })
+})
+
+apiRouter.patch(endpoint + 'usuarios/tornar-admin', middleWare.checkToken, (req, res) => {
+    knex('usuarios')
+        .where({ id: req.usuarioId })
+        .update({
+            roles: 'USER;ADMIN'
+        }, ['id', 'roles'])
+        .then(_ => {
+            res.status(200).json({ message: `Usuário atualizado com sucesso.` })
+        })
+        .catch(err => res.status(500).json({ message: `Erro ao atualizar usuário: ${err.message}` }))
 })
 
 module.exports = apiRouter;

@@ -6,8 +6,8 @@ $(document).ready(function () {
     $('.register-btn').click(function () {
         var data = {
             nome: $('input[name=name]').val(),
-            login: $('input[name=username]').val(),
-            senha: $('input[name=password]').val(),
+            login: $('input[name=username2]').val(),
+            senha: $('input[name=password2]').val(),
             email: $('input[name=email]').val()
         };
         $.ajax({
@@ -19,7 +19,7 @@ $(document).ready(function () {
                 Swal.fire({
                     icon: 'success',
                     title: 'Sucesso',
-                    text: 'Account created successfully!'
+                    text: 'Conta criada com sucesso!'
                 }).then((result) => {
                     localStorage.setItem('token', response.token);
                     window.location.href = "/produtos.html";
