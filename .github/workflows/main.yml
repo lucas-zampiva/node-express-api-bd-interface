@@ -31,6 +31,10 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_API_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_API_EMAIL}}
           justlogin: true
+      - name: Add Heroku remote
+        run: heroku git:remote --app=${{ env.HEROKU_API_APP_NAME }}
+      - name: Push to master branch app on Heroku
+        run: git push heroku ${{ github.ref_name }}:master --force
       - name: config heroku
         run: heroku config:set PGSSLMODE=no-verify -a ${{secrets.HEROKU_API_APP_NAME}}
       - name: rodar migrations
