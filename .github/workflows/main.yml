@@ -20,23 +20,12 @@ jobs:
     needs: [build]
     steps:
       - uses: actions/checkout@v2
-      - name: Commit changes
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git commit -m "Trigger Heroku build" --allow-empty
-      - uses: akhileshns/heroku-deploy@v3.12.14 
+      - uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_API_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_API_EMAIL}}
           justlogin: true
-      - name: Add Heroku remote
-        run: heroku git:remote --app=${{secrets.HEROKU_API_APP_NAME}}
-      - name: Busca all branchs e desfaz o shallow
-        run: git fetch --all --unshallow
-      - name: Push to master branch app on Heroku
-        run: git push heroku ${{ github.ref_name }}:master --force
       - name: config heroku
         run: heroku config:set PGSSLMODE=no-verify -a ${{secrets.HEROKU_API_APP_NAME}}
       - name: rodar migrations
